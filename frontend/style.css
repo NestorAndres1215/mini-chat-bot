@@ -14,7 +14,6 @@ body {
   padding: 1.5rem;
 }
 
-/* ── Shell ── */
 .chat-shell {
   background: #f5f4f0;
   border-radius: 16px;
@@ -25,7 +24,6 @@ body {
   box-shadow: 0 8px 32px rgba(0,0,0,0.08);
 }
 
-/* ── Header ── */
 .chat-header {
   background: #ffffff;
   border-bottom: 0.5px solid rgba(0,0,0,0.08);
@@ -59,7 +57,6 @@ body {
   font-weight: 500;
 }
 
-/* ── Quick tags ── */
 .quick-tags {
   padding: 10px 18px 6px;
   display: flex;
@@ -88,7 +85,6 @@ body {
   color: #0F6E56;
 }
 
-/* ── Messages ── */
 #chat {
   height: 340px;
   overflow-y: auto;
@@ -169,7 +165,6 @@ body {
   margin-top: 3px;
 }
 
-/* ── Typing indicator ── */
 .typing {
   display: flex;
   gap: 4px;
@@ -193,7 +188,7 @@ body {
   30%           { transform: translateY(-5px); }
 }
 
-/* ── Footer ── */
+
 .chat-footer {
   background: #ffffff;
   border-top: 0.5px solid rgba(0,0,0,0.08);

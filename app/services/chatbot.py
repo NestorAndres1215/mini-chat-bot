@@ -18,9 +18,6 @@ from app.services.analisis import (
 def responder(mensaje: str):
     mensaje = mensaje.lower()
 
-    # =========================
-    # 👋 CONVERSACIÓN HUMANA
-    # =========================
     if any(p in mensaje for p in ["hola", "buenas", "hey", "que tal"]):
         return random.choice([
             "👋 ¡Hola! ¿En qué te ayudo hoy con tus gastos?",
@@ -48,15 +45,9 @@ def responder(mensaje: str):
     if any(p in mensaje for p in ["ok", "dale", "listo"]):
         return "👍 Perfecto, dime qué quieres analizar"
 
-    # =========================
-    # 🧠 INSIGHT COMPLETO
-    # =========================
     if any(p in mensaje for p in ["analisis", "análisis", "insight", "resumen"]):
         return insight_financiero()
 
-    # =========================
-    # 📊 PORCENTAJES
-    # =========================
     if any(p in mensaje for p in ["porcentaje", "%", "distribucion", "distribución"]):
         data = porcentaje_por_categoria()
         if data is None:
@@ -69,9 +60,6 @@ def responder(mensaje: str):
         texto += "\n💡 Tip: intenta reducir la categoría más alta"
         return texto
 
-    # =========================
-    # 📈 RANKING
-    # =========================
     if any(p in mensaje for p in ["ranking", "top", "orden", "lista"]):
         data = ranking_gastos()
         if data is None:
@@ -83,9 +71,6 @@ def responder(mensaje: str):
 
         return texto
 
-    # =========================
-    # 🔝 MAYOR GASTO
-    # =========================
     if any(p in mensaje for p in ["mas", "más", "mayor", "alto"]):
         r = gasto_mayor_categoria()
         if not r:
@@ -98,9 +83,6 @@ def responder(mensaje: str):
             f"⚠️ Es la categoría que más impacta tu dinero"
         )
 
-    # =========================
-    # 🔻 MENOR GASTO
-    # =========================
     if any(p in mensaje for p in ["menos", "menor", "bajo"]):
         r = gasto_menor_categoria()
         if not r:
@@ -109,16 +91,10 @@ def responder(mensaje: str):
         cat, monto = r
         return f"🔻 Tu menor gasto es en **{cat}** con S/{monto:.2f}"
 
-    # =========================
-    # 📊 PROMEDIO
-    # =========================
     if "promedio" in mensaje:
         p = gasto_promedio()
         return f"📊 Tu gasto promedio es S/{p:.2f}" if p else "📭 Sin datos"
 
-    # =========================
-    # 📅 MES
-    # =========================
     if any(p in mensaje for p in ["mes", "mensual"]):
         data = gasto_por_mes()
         if data is None:
@@ -130,16 +106,11 @@ def responder(mensaje: str):
 
         return texto
 
-    # =========================
-    # 💸 TOTAL
-    # =========================
     if any(p in mensaje for p in ["total", "cuanto gaste", "gasté", "gaste"]):
         t = total_gastos()
         return f"💸 Has gastado en total: S/{t:.2f}" if t else "📭 Sin datos"
 
-    # =========================
-    # 📊 COMPARACIÓN
-    # =========================
+
     if "comparacion" in mensaje or "comparación" in mensaje:
         c = comparacion_mensual()
         if not c:
@@ -151,9 +122,6 @@ def responder(mensaje: str):
             f"📈 Cambio: {c['variacion']:.2f}%"
         )
 
-    # =========================
-    # 📊 FRECUENCIA
-    # =========================
     if "frecuente" in mensaje:
         r = categoria_mas_frecuente()
         if not r:
@@ -161,9 +129,6 @@ def responder(mensaje: str):
 
         return f"📊 La categoría que más usas es {r[0]} ({r[1]} veces)"
 
-    # =========================
-    # 📅 DÍA MÁS CARO
-    # =========================
     if "dia caro" in mensaje or "día caro" in mensaje:
         r = dia_mas_caro()
         if not r:
@@ -171,9 +136,6 @@ def responder(mensaje: str):
 
         return f"📅 El día que más gastaste fue {r[0]} con S/{r[1]:.2f}"
 
-    # =========================
-    # ❌ NO ENTENDIDO
-    # =========================
     return random.choice([
         "😅 No te entendí bien, ¿puedes reformularlo?",
         "🤔 No estoy seguro de eso, prueba preguntar de otra forma",
